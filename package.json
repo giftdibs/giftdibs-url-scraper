@@ -36,7 +36,6 @@
     "firebase-admin": "10.0.0",
     "firebase-functions": "3.15.7",
     "giftdibs-product-page-scraper": "1.0.0-alpha.5",
-    "puppeteer": "10.4.0",
     "puppeteer-core": "10.4.0",
     "winston": "3.3.3"
   },
@@ -52,6 +51,7 @@
     "jasmine-spec-reporter": "4.2.1",
     "mock-require": "3.0.3",
     "nodemon": "2.0.4",
-    "nyc": "15.1.0"
+    "nyc": "15.1.0",
+    "puppeteer": "10.4.0"
   }
 }
