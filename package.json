@@ -33,10 +33,10 @@
     "cors": "2.8.5",
     "dotenv": "8.2.0",
     "express": "4.17.1",
-    "firebase-admin": "10.0.0",
+    "firebase-admin": "10.0.2",
     "firebase-functions": "3.15.7",
     "giftdibs-product-page-scraper": "1.0.0-alpha.5",
-    "puppeteer-core": "10.4.0",
+    "puppeteer-core": "13.5.1",
     "winston": "3.3.3"
   },
   "devDependencies": {
@@ -52,6 +52,6 @@
     "mock-require": "3.0.3",
     "nodemon": "2.0.4",
     "nyc": "15.1.0",
-    "puppeteer": "10.4.0"
+    "puppeteer": "13.5.1"
   }
 }
