@@ -13,7 +13,7 @@ function getPuppeteer() {
   //   return require('puppeteer-core');
   // }
 
-  return require('puppeteer-core');
+  return require('puppeteer');
 }
 
 async function getPuppeteerOptions() {
