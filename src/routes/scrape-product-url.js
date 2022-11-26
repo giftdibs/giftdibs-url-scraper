@@ -9,25 +9,25 @@ const router = express.Router();
 const isUrlRegExp = /^https?:\/\//;
 
 function getPuppeteer() {
-  // if (NODE_ENV !== 'development') {
-  //   return require('puppeteer-core');
-  // }
+  if (NODE_ENV !== 'development') {
+    return require('puppeteer-core');
+  }
 
   return require('puppeteer');
 }
 
 async function getPuppeteerOptions() {
-  // if (NODE_ENV !== 'development') {
-  //   // Use chrome-aws-lambda in production; it's much faster.
-  //   // See: https://github.com/GoogleChrome/puppeteer/issues/3120#issuecomment-450575911
-  //   const chromium = require('chrome-aws-lambda');
-  //   return {
-  //     args: chromium.args,
-  //     defaultViewport: chromium.defaultViewport,
-  //     executablePath: await chromium.executablePath,
-  //     headless: chromium.headless
-  //   };
-  // }
+  if (NODE_ENV !== 'development') {
+    // Use chrome-aws-lambda in production; it's much faster.
+    // See: https://github.com/GoogleChrome/puppeteer/issues/3120#issuecomment-450575911
+    const chromium = require('chrome-aws-lambda');
+    return {
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+    };
+  }
 
   return {
     headless: true,
