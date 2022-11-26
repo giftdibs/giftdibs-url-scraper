@@ -19,10 +19,12 @@ describe('environment', () => {
   it('should log a message if the config file is not found', () => {
     spyOn(logger, 'info').and.returnValue();
     spyOn(dotenv, 'config').and.returnValue({
-      error: new Error('not found')
+      error: new Error('not found'),
     });
     const { getEnvironment } = require('./environment');
     getEnvironment();
-    expect(logger.info).toHaveBeenCalledWith('Environment configuration could not be parsed from config.env.');
+    expect(logger.info).toHaveBeenCalledWith(
+      'Environment configuration could not be parsed from config.env.'
+    );
   });
 });

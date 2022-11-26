@@ -1,8 +1,6 @@
 describe('error', () => {
   it('should return error constructors', () => {
-    const {
-      URLScraperNotFoundError
-    } = require('./errors');
+    const { URLScraperNotFoundError } = require('./errors');
 
     expect(typeof URLScraperNotFoundError).toEqual('function');
 

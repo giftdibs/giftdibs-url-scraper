@@ -7,8 +7,8 @@ describe('/scrape-product-url', () => {
   beforeEach(() => {
     _req = {
       query: {
-        url: encodeURIComponent('http://foo.com')
-      }
+        url: encodeURIComponent('http://foo.com'),
+      },
     };
     urlScraper = mock.reRequire('../utils/url-scraper');
   });
@@ -24,7 +24,7 @@ describe('/scrape-product-url', () => {
     const res = {
       json(data) {
         expect(data.products[0].name).toBeDefined();
-      }
+      },
     };
     scrapeProductUrl(_req, res, () => {});
   });

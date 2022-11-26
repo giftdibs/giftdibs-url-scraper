@@ -1,3 +1,1 @@
-module.exports = [
-  require('./scrape-product-url').router
-];
+module.exports = [require('./scrape-product-url').router];

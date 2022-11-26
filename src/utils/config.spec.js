@@ -24,7 +24,7 @@ describe('url scraper config util', () => {
     expect(isValidConfig(config)).toEqual(true);
   });
 
-  it('should return defaults if a site doesn\'t match', () => {
+  it("should return defaults if a site doesn't match", () => {
     const { getConfig } = mock.reRequire('./config');
     const config = getConfig('foobarbaz.???');
     expect(config.nameSelector).toEqual('title');
@@ -37,15 +37,15 @@ describe('url scraper config util', () => {
     mock('glob', {
       sync() {
         return ['my-config'];
-      }
+      },
     });
 
     mock('my-config', {
       getConfig() {
         return {
-          nameSelector: 'custom-name'
+          nameSelector: 'custom-name',
         };
-      }
+      },
     });
 
     const { getConfig } = mock.reRequire('./config');

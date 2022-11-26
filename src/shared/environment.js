@@ -13,7 +13,7 @@ const applyEnvironment = () => {
   const filePath = path.resolve(cwd, 'config.env');
 
   const result = dotenv.config({
-    path: filePath
+    path: filePath,
   });
 
   if (result.error) {
@@ -21,9 +21,7 @@ const applyEnvironment = () => {
       `Environment configuration could not be parsed from ${filePath}.`
     );
   } else {
-    console.log(
-      `Environment configuration parsed from ${filePath}.`
-    );
+    console.log(`Environment configuration parsed from ${filePath}.`);
   }
 };
 
@@ -38,5 +36,5 @@ module.exports = {
     }
 
     return value;
-  }
+  },
 };

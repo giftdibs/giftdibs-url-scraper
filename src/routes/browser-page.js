@@ -1,12 +1,7 @@
-const express = require('express');
-const scrapeProductPage = require('giftdibs-product-page-scraper/src/scrape-product-page');
-
 const env = require('../shared/environment');
 const NODE_ENV = env.get('NODE_ENV');
-const { URLScraperNotFoundError } = require('../shared/errors');
 
-const router = express.Router();
-const isUrlRegExp = /^https?:\/\//;
+let PAGE;
 
 function getPuppeteer() {
   // if (NODE_ENV !== 'development') {
@@ -46,12 +41,16 @@ async function getPuppeteerOptions() {
   };
 }
 
-async function launchUrl(url, callback, args) {
+async function getPage() {
   const options = await getPuppeteerOptions();
 
   const browser = await getPuppeteer().launch(options);
 
-  const page = await browser.newPage();
+  if (PAGE) {
+    return PAGE;
+  }
+
+  PAGE = await browser.newPage();
 
   // See: https://intoli.com/blog/making-chrome-headless-undetectable/
   // Use Safari, so that some sites won't serve webp images (like Target.com).
@@ -60,20 +59,20 @@ async function launchUrl(url, callback, args) {
   // );
 
   if (NODE_ENV === 'development') {
-    page.on('console', (message) => {
+    PAGE.on('console', (message) => {
       console.log('PAGE LOG:', message.text());
     });
   }
 
-  page.setViewport({
+  PAGE.setViewport({
     width: 1600,
     height: 1200,
   });
 
-  await page.setRequestInterception(true);
-  await page.setBypassCSP(true);
+  await PAGE.setRequestInterception(true);
+  await PAGE.setBypassCSP(true);
 
-  page.on('request', (request) => {
+  PAGE.on('request', (request) => {
     const requestUrl = request.url();
     const resourceType = request.resourceType();
 
@@ -133,44 +132,7 @@ async function launchUrl(url, callback, args) {
     request.continue();
   });
 
-  await page.goto(url, {
-    waitUntil: 'load',
-  });
-
-  const result = await page.evaluate(callback, args);
-
-  await browser.close();
-
-  return result;
+  return PAGE;
 }
 
-async function scrapeProductUrl(url, config) {
-  const details = await launchUrl(url, scrapeProductPage, config);
-
-  details.url = url;
-
-  return details;
-}
-
-router.route('/products').get((req, res, next) => {
-  const url = decodeURIComponent(req.query.url);
-  const isUrl = isUrlRegExp.test(url);
-
-  if (!isUrl) {
-    next(new URLScraperNotFoundError());
-    return;
-  }
-
-  const { getConfig } = require('../utils/config');
-  const productConfig = getConfig(url);
-
-  scrapeProductUrl(url, productConfig)
-    .then((product) => {
-      res.json({ product });
-    })
-    .catch(next);
-});
-
-module.exports = {
-  router,
-};
+module.exports = getPage;

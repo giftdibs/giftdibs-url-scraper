@@ -10,9 +10,9 @@ describe('error handler middleware', () => {
             expect(result.message).toBe('invalid');
 
             expect(code).toEqual(403);
-          }
+          },
         };
-      }
+      },
     };
     middleware(err, null, res, () => {});
   });
@@ -26,9 +26,9 @@ describe('error handler middleware', () => {
           json: (result) => {
             expect(result.code).toEqual(0);
             expect(statusCode).toEqual(404);
-          }
+          },
         };
-      }
+      },
     };
     middleware(err, null, res, () => {});
   });

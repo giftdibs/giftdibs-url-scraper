@@ -1,16 +1,16 @@
 {
-  "plugins": [
-    "standard",
-    "jasmine"
-  ],
+  "plugins": ["standard", "jasmine"],
   "env": {
     "jasmine": true
   },
-  "extends": ["standard", "plugin:jasmine/recommended"],
+  "extends": ["standard", "plugin:jasmine/recommended", "prettier"],
   "rules": {
     "semi": 0,
     "object-curly-spacing": ["error", "always"],
-    "space-before-function-paren": ["error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
+    "space-before-function-paren": [
+      "error",
+      { "anonymous": "always", "named": "never", "asyncArrow": "always" }
+    ],
     "jasmine/new-line-before-expect": 0,
     "jasmine/no-spec-dupes": [1, "branch"]
   }

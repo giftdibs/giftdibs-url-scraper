@@ -8,5 +8,5 @@ function URLScraperNotFoundError() {
 URLScraperNotFoundError.prototype = Error.prototype;
 
 module.exports = {
-  URLScraperNotFoundError
+  URLScraperNotFoundError,
 };

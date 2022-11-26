@@ -3,13 +3,13 @@ const mock = require('mock-require');
 describe('app', () => {
   beforeEach(() => {
     mock('./shared/environment', {
-      getEnvironment() {}
+      getEnvironment() {},
     });
     mock('express', () => {
       return {
         set: () => {},
         use: () => {},
-        port: () => {}
+        port: () => {},
       };
     });
     mock('./routes', {});

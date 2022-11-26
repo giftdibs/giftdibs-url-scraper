@@ -18,22 +18,22 @@ if (!allowedOrigins) {
 
 const whitelist = allowedOrigins.split(',');
 
-app.use(cors({
-  methods: 'GET,POST,OPTIONS',
-  optionsSuccessStatus: 200,
-  origin: (origin, callback) => {
-    // No origin means "same origin":
-    // See: https://github.com/expressjs/cors/issues/118
-    if (origin === undefined || whitelist.indexOf(origin) !== -1) {
-      console.log(`The domain ${origin} is allowed access.`);
-      callback(null, true);
-    } else {
-      callback(
-        new Error(`The domain ${origin} is not allowed access.`)
-      );
-    }
-  }
-}));
+app.use(
+  cors({
+    methods: 'GET,POST,OPTIONS',
+    optionsSuccessStatus: 200,
+    origin: (origin, callback) => {
+      // No origin means "same origin":
+      // See: https://github.com/expressjs/cors/issues/118
+      if (origin === undefined || whitelist.indexOf(origin) !== -1) {
+        console.log(`The domain ${origin} is allowed access.`);
+        callback(null, true);
+      } else {
+        callback(new Error(`The domain ${origin} is not allowed access.`));
+      }
+    },
+  })
+);
 app.options('*', cors());
 
 app.use('/v1', require('./routes'));
